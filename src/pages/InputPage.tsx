@@ -68,8 +68,6 @@ const InputPage = () => {
 
     const activeClass = activeClasses[0]
 
-    console.log(activeClass, '<<<<')
-
     return (
         <Container>
             <Header>Input Name</Header>
