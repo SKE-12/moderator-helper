@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from '@material-ui/core';
+
+import { without } from 'lodash';
 import styled from 'styled-components';
+
+import { Button } from '@material-ui/core';
 import { ArrowForwardIos } from '@material-ui/icons';
- 
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -51,13 +54,13 @@ const CardComponent = styled.div`
     flex-direction: column;
     overflow: auto;
 `
-const RoleText = styled.div`
+const Roconstext = styled.div`
     padding-left: 1%;
     padding-top: 1%;
     cursor: pointer;
 `
 
-let roleList = [
+const roleList = [
     'Plague Doctor',
     'Plague Doctor',
     'Plague Doctor',
@@ -87,26 +90,20 @@ let roleList = [
 class SelectPage extends Component {
 
     state = {
-        roleList: roleList,
+        roleList,
         useList: [] as string[]
     }
 
     selectRole(role: string){
-        let index = this.state.roleList.indexOf(role)
-        let useList = this.state.useList
-        let roleList = this.state.roleList
-        useList.push(role)
-        roleList.splice(index, 1)
-        this.setState({useList: useList, roleList: roleList})
+        const useList = this.state.useList
+        const roleList = this.state.roleList
+        this.setState({ useList: [...useList, role], roleList: without(roleList, role) })
     }
 
     unselecteRole(role: string){
-        let index = this.state.roleList.indexOf(role)
-        let useList = this.state.useList
-        let roleList = this.state.roleList
-        roleList.push(role)
-        useList.splice(index, 1)
-        this.setState({useList: useList, roleList: roleList})
+        const useList = this.state.useList
+        const roleList = this.state.roleList
+        this.setState({ useList: without(useList, role), roleList: [ ...roleList, role] })
     }
 
     render() {
@@ -122,7 +119,7 @@ class SelectPage extends Component {
                         <CardComponent>
                             {this.state.roleList.map((role) => {
                                 return(
-                                    <RoleText onClick={() => this.selectRole(role)}>{role}</RoleText>
+                                    <Roconstext onClick={() => this.selectRole(role)}>{role}</Roconstext>
                                 )
                             })}
                         </CardComponent>
@@ -132,7 +129,7 @@ class SelectPage extends Component {
                         <CardComponent>
                             {this.state.useList.map((role) => {
                                 return(
-                                    <RoleText onClick={() => this.unselecteRole(role)}>{role}</RoleText>
+                                    <Roconstext onClick={() => this.unselecteRole(role)}>{role}</Roconstext>
                                 )
                             })}
                         </CardComponent>
