@@ -45,7 +45,7 @@ export default class GameState {
   }
 
   public getMajority(): number {
-    return Math.ceil(this.getAlivePlayer().length/2)
+    return Math.ceil(this.getAlivePlayer().filter((player) => player.playerName).length/2)
   }
 
   public endNight() {
