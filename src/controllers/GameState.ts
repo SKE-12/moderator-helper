@@ -40,6 +40,14 @@ export default class GameState {
     this.nightSummary = new SummaryModel()
   }
 
+  public getAlivePlayer(): Player[] {
+    return this.players.filter(player => player.isAlive)
+  }
+
+  public getMajority(): number {
+    return Math.ceil(this.getAlivePlayer().length/2)
+  }
+
   public endNight() {
     this.killTarget.filter(killPlayer => {
       for (const savedPlayer of this.saveTarget) {
@@ -83,7 +91,7 @@ export default class GameState {
 
   private checkWinCondition(): Allegiance | null {
     let villianSide = 0
-    const alivePlayer = this.players.filter(player => player.isAlive)
+    const alivePlayer = this.getAlivePlayer()
     for (const player of alivePlayer) {
       if (player.allegiance === Allegiance.PLAGUE) {
         villianSide++
