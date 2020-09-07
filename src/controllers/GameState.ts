@@ -1,21 +1,39 @@
-import Player from "../models/Player";
-import { Allegiance, GamePhase } from "../models/Allegiance";
-import SummaryModel from "../models/SummaryModel";
+import {
+  action,
+  observable,
+} from 'mobx';
+
+import {
+  Allegiance,
+  GamePhase,
+} from '../models/Allegiance';
+import Player from '../models/Player';
+import SummaryModel from '../models/SummaryModel';
 
 export default class GameState {
+  @observable
   public gamePhase: GamePhase
 
+  @observable.deep
   public players: Player[]
 
+  @observable.deep
   public killTarget: Player[]
 
+  @observable
   public huntressTarget: Player | null
 
+  @observable.deep
   public saveTarget: Player[]
 
+  @observable
   public winner: Allegiance | null
 
+  @observable
   public nightSummary: SummaryModel
+
+  @observable
+  public activePlayerClasses: any[] = []
 
   constructor() {
     this.gamePhase = GamePhase.SETUP
@@ -27,11 +45,18 @@ export default class GameState {
     this.winner = null
   }
 
+  @action.bound
+  setInitialiatePlayerClasses(classes: any[]) {
+    this.activePlayerClasses = classes
+  }
+
+  @action.bound
   public setPlayerAndStartGame(players: Player[]) {
     this.players = players
     this.gamePhase = GamePhase.DAY
   }
 
+  @action.bound
   public startNight() {
     this.killTarget = []
     this.saveTarget = []
@@ -40,14 +65,17 @@ export default class GameState {
     this.nightSummary = new SummaryModel()
   }
 
+  @action.bound
   public getAlivePlayer(): Player[] {
     return this.players.filter(player => player.isAlive)
   }
 
+  @action.bound
   public getMajority(): number {
     return Math.ceil(this.getAlivePlayer().length/2)
   }
 
+  @action.bound
   public endNight() {
     this.killTarget.filter(killPlayer => {
       for (const savedPlayer of this.saveTarget) {
@@ -64,31 +92,41 @@ export default class GameState {
     if (this.huntressTarget) {
       this.nightSummary.annoucement.push('Player: ' + this.huntressTarget.playerName + 'ถูกฆ่าตายในคืนนี้')
     }
-    this.gamePhase = GamePhase.DAY
   }
 
+  @action.bound
   public endGame(winner: Allegiance) {
     this.gamePhase = GamePhase.END
     this.winner = winner
   }
 
+  @action.bound
   public nightAction(player: Player, targets: Player[]) {
     player.nightAction(this, targets)
   }
 
+  @action.bound
   public voteOut(player: Player) {
     player.votedOut(this)
     const winning = this.checkWinCondition()
     if(winning) {
       this.endGame(winning)
+      return
     }
     this.gamePhase = GamePhase.NIGHT
   }
 
+  @action.bound
   public endDay() {
     this.gamePhase = GamePhase.NIGHT
   }
 
+  @action.bound
+  public goToDay() {
+    this.gamePhase = GamePhase.DAY
+  }
+
+  @action.bound
   private checkWinCondition(): Allegiance | null {
     let villianSide = 0
     const alivePlayer = this.getAlivePlayer()

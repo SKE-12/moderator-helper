@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
 import {
   Button,
   Gap,
@@ -8,6 +7,7 @@ import {
 import styled from 'styled-components';
 
 import VoteOutModal from '../components/VoteOutModal';
+import { useGameState } from '../contexts/gameController';
 
 const Container = styled.div`
     width: 100%;
@@ -19,46 +19,28 @@ const Danger = styled(Button)`
     background-color: red !important;
 `
 
-const FAKE_DATA = [
-    {
-        title: 'Fuck',
-        value: 1,
-    },
-    {
-        title: 'Fuck',
-        value: 1,
-    },
-    {
-        title: 'Fuck',
-        value: 1,
-    },
-    {
-        title: 'Fuck',
-        value: 1,
-    },
-]
-
 const DayPage = () => {
-    const history = useHistory()
-    const onSkip = () => {
-        history.push('/night')
-    }
+    const { players, majority, startNight } = useGameState(gameState => ({
+        majority: gameState.getMajority(),
+        players: gameState.getAlivePlayer(),
+        startNight: gameState.startNight,
+    }))
 
     return (
         <Gap type="vertical" size="8px">
             <h1>Day Phase</h1>
             <Container>
                 <div className="title bold">Player</div>
-                <div className="title bold">Majority</div>
+                <div className="title bold">Majority ({majority})</div>
             </Container>
-            {FAKE_DATA.map(({ title, value }) => (
+            {players.map(({ playerName, role }) => (
                 <Container>
-                    <div>{title}</div>
-                    <div>{value}</div>
+                    <div>{playerName}</div>
+                    <div>{role}</div>
                 </Container>
             ))}
             <VoteOutModal />
-            <Danger onClick={onSkip}>Skip</Danger>
+            <Danger onClick={startNight}>Skip</Danger>
         </Gap>
     )
 }

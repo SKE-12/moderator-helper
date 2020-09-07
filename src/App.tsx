@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 
+import PhaseController from './components/PhaseController';
 import DayPage from './pages/DayPage';
 import InputPage from './pages/InputPage';
 import Night from './pages/NightPage';
@@ -19,6 +20,7 @@ const Container = styled.div`
 const App = () => {
   return (
     <Container>
+      <PhaseController />
       <Switch>
         <Route path="/input" component={InputPage} />
         <Route path="/day" component={DayPage} />

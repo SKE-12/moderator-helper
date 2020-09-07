@@ -1,6 +1,8 @@
-import GameState from '../controllers/GameState'
-import { Allegiance, RoleName } from '../models/Allegiance'
-
+import GameState from '../controllers/GameState';
+import {
+  Allegiance,
+  RoleName,
+} from '../models/Allegiance';
 
 export default class Player {
   public id: number
@@ -22,7 +24,7 @@ export default class Player {
   public isAlive: boolean
 
   constructor() {
-    this.id= 1
+    this.id= Date.now()
     this.role = RoleName.VILLAGER
     this.playerName = ''
     this.modDescription = ''

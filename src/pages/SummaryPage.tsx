@@ -1,29 +1,23 @@
 import React from 'react';
 
-import { useHistory } from 'react-router-dom';
 import {
   Button,
   Gap,
 } from 'solarxui';
 
-const PLAYERLIST = ['noob','noob','noob','noob','noob','noob',]
+import { useGameState } from '../contexts/gameController';
 
 const SummaryPage = () => {
-    const history = useHistory()
-    const onNext = () => {
-        history.push('day')
-    }
+    const { goToDay, nightSummary } = useGameState(gameState => ({
+        goToDay: gameState.goToDay,
+        nightSummary: gameState.nightSummary,
+    }))
 
     return (
         <Gap type="vertical" size="8px">
             <h1>Summary</h1>
-            <div className="bold">Player killed:</div>
-            {PLAYERLIST.map((name, index) => (
-                <div key={index}>
-                    {name}
-                </div>
-            ))}
-            <Button onClick={onNext}>Next</Button>
+            {nightSummary.annoucement}
+            <Button onClick={goToDay}>Next</Button>
         </Gap>
     )
 }

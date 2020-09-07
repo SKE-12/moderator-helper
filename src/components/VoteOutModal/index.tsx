@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 
 // @ts-ignore
 import Select from 'react-dropdown-select';
-import { useHistory } from 'react-router-dom';
 import {
   Button,
   Gap,
   Modal,
 } from 'solarxui';
 import styled from 'styled-components';
+
+import { useGameState } from '../../contexts/gameController';
+import Player from '../../models/Player';
 
 const Container = styled.div`
     padding: 16px;
@@ -24,16 +26,16 @@ const Wrapper = styled.div`
     }
 `
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-]
-
 const VoteOutModal = () => {
-    const history = useHistory()
     const [state, setState] = useState('none')
-    const [currentSelect, setCurrentSelect] = useState('')
+    const [currentSelect, setCurrentSelect] = useState<Player>()
+    const { players, voteOut } = useGameState(gameState => ({
+        players: gameState.getAlivePlayer().map(player => ({
+            value: player,
+            label: player.playerName,
+        })),
+        voteOut: gameState.voteOut,
+    }))
     const onVoteOutStart = () => {
         setState('start')
     }
@@ -42,7 +44,7 @@ const VoteOutModal = () => {
         if (state === 'start') {
             setState('select')
         } else {
-            history.push('/night')
+            voteOut(currentSelect!)
         }
     }
 
@@ -62,11 +64,11 @@ const VoteOutModal = () => {
                                     <>
                                         <div className="title">Vote Out</div>
                                         {/** @ts-ignore */}
-                                        <Select options={options} values={[currentSelect]} dropdownPosition="top" onChange={setCurrentSelect} />
+                                        <Select options={players} values={currentSelect} dropdownPosition="top" onChange={([value]) => setCurrentSelect(value.value)} />
                                     </>
                                 ) : (
                                     <div>
-                                        Gun will die and go to night phase
+                                        {currentSelect?.playerName} will die and go to night phase
                                     </div>
                                 )}
                                 <Gap size="8px">

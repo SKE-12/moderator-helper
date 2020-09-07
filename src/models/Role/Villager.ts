@@ -1,16 +1,19 @@
-import Player from "../Player";
-import { Allegiance, RoleName } from "../Allegiance";
+import {
+  Allegiance,
+  RoleName,
+} from '../Allegiance';
+import Player from '../Player';
 
-export default class Apothecary extends Player {
+export default class Villager extends Player {
 
   constructor(playerName: string) {
     super()
     this.playerName = playerName
-    this.modDescription = 'Apothecary ลืมตา Apothecary ชี้คนที่จะปกป้อง 1 คน'
+    this.modDescription = ''
     this.role = RoleName.VILLAGER
     this.vote = 1
     this.allegiance = Allegiance.VILLAGER
-    this.isNightRole = true
+    this.isNightRole = false
     this.order = 15
   }
 }

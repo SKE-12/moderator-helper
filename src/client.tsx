@@ -5,12 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import { SolarXUIStylesheet } from 'solarxui';
 
 import App from './App';
+import { Wrapper } from './contexts/gameController';
 
 render(
-  <BrowserRouter>
-    <SolarXUIStylesheet />
-    <App />
-  </BrowserRouter>,
+  <Wrapper>
+    <BrowserRouter>
+      <SolarXUIStylesheet />
+      <App />
+    </BrowserRouter>
+  </Wrapper>,
   document.getElementById('root')
 );
 

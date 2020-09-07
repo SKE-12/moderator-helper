@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 
-import { without } from 'lodash';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from '@material-ui/core';
 import { ArrowForwardIos } from '@material-ui/icons';
+
+import { context } from '../contexts/gameController';
+import Beggar from '../models/Role/Beggar';
+import Blacksmith from '../models/Role/Blacksmith';
+import ContagiousVillager from '../models/Role/ContagiousVillager';
+import Crow from '../models/Role/Crow';
+import Elder from '../models/Role/Elder';
+import FallenAngel from '../models/Role/FallenAngel';
+import Healer from '../models/Role/Healer';
+import Huntress from '../models/Role/Huntress';
+import PlagueDoctor from '../models/Role/PlagueDoctor';
+import Priest from '../models/Role/Priest';
+import Sentry from '../models/Role/Sentry';
+import SinisterVillager from '../models/Role/SinisterVillager';
+import Undertaker from '../models/Role/Undertaker';
+import Apothecary from '../models/Role/Villager';
+import Villager from '../models/Role/Villager';
+import WeakVillager from '../models/Role/WeakVillager';
 
 const Container = styled.div`
     display: flex;
@@ -76,7 +94,7 @@ const roleList = [
     'Villager',
     'Blacksmith',
     'Elder',
-    'FallenAngle',
+    'FallenAngel',
     'Beggar',
     'Weak Villager',
     'Contagious Villager',
@@ -87,7 +105,29 @@ const roleList = [
     'Undertaker',
 ]
 
+const Mapper = {
+    'Plague Doctor': PlagueDoctor,
+    'Priest': Priest,
+    'Apothecary': Apothecary,
+    'Healer': Healer,
+    'Sentry': Sentry,
+    'Villager': Villager,
+    'Blacksmith': Blacksmith,
+    'Elder': Elder,
+    'FallenAngel': FallenAngel,
+    'Beggar': Beggar,
+    'Weak Villager': WeakVillager,
+    'Contagious Villager': ContagiousVillager,
+    'Crow': Crow,
+    'Huntress': Huntress,
+    'Siniter Villager': SinisterVillager,
+    'Undertaker': Undertaker,
+}
+
+// @ts-ignore
+@withRouter
 class SelectPage extends Component {
+    static contextType = context
 
     state = {
         roleList,
@@ -96,14 +136,27 @@ class SelectPage extends Component {
 
     selectRole(role: string){
         const useList = this.state.useList
-        const roleList = this.state.roleList
-        this.setState({ useList: [...useList, role], roleList: without(roleList, role) })
+        const roleList = [...this.state.roleList]
+        roleList.splice(roleList.indexOf(role), 1)
+        this.setState({ useList: [...useList, role], roleList })
     }
 
     unselecteRole(role: string){
-        const useList = this.state.useList
+        const useList = [...this.state.useList]
         const roleList = this.state.roleList
-        this.setState({ useList: without(useList, role), roleList: [ ...roleList, role] })
+
+        useList.splice(useList.indexOf(role), 1)
+        this.setState({ useList, roleList: [ ...roleList, role] })
+    }
+
+    onSubmit = () => {
+        // @ts-ignore
+        const activeRole = this.state.useList.map(role => Mapper[role])
+        const gameState = this.context
+        gameState.setInitialiatePlayerClasses(activeRole)
+
+        // @ts-ignore
+        this.props.history.push('/input')
     }
 
     render() {
@@ -135,7 +188,7 @@ class SelectPage extends Component {
                         </CardComponent>
                     </Card>
                 </ComponentContainer>
-                <Button variant="outlined" style={{marginTop: "20px"}}>Submit</Button>
+                <Button variant="outlined" style={{marginTop: "20px"}} onClick={this.onSubmit}>Submit</Button>
             </Container>
         )
     }

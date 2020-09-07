@@ -1,6 +1,9 @@
-import Player from "../Player";
-import GameState from "../../controllers/GameState";
-import { Allegiance, RoleName } from "../Allegiance";
+import GameState from '../../controllers/GameState';
+import {
+  Allegiance,
+  RoleName,
+} from '../Allegiance';
+import Player from '../Player';
 
 export default class FallenAngel extends Player {
 
