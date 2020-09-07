@@ -31,7 +31,7 @@ export default class FallenAngel extends Player {
     const savedIndex = gameState.saveTarget.findIndex(player =>  {
       return gameState.killTarget[changeIndex].id === player.id
     })
-    if (savedIndex === -1) {
+    if (savedIndex !== -1) {
       return null
     }
     gameState.killTarget[changeIndex] = target[1]

@@ -100,8 +100,6 @@ export default class GameState {
       }
       return true
     })
-    console.log('saved', this.saveTarget)
-    console.log('Killed', killed)
     for(const deadPlayer of killed) {
       const isDead = deadPlayer.deathRattle(this)
       if (isDead) {
@@ -110,12 +108,6 @@ export default class GameState {
     }
     if (this.huntressTarget) {
       this.nightSummary.annoucement.push('Player: ' + this.huntressTarget.playerName + 'ถูกฆ่าตายในคืนนี้')
-    }
-
-    this.winner = this.checkWinCondition()
-
-    if (this.winner) {
-      this.endGame(this.winner)
     }
   }
 
@@ -148,6 +140,12 @@ export default class GameState {
 
   @action.bound
   public goToDay() {
+    const winner = this.checkWinCondition()
+
+    if (winner) {
+      this.endGame(winner)
+      return
+    }
     this.gamePhase = GamePhase.DAY
   }
 
