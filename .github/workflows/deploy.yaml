@@ -18,6 +18,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build
+      env:
+        NODE_ENV: development
       run: |
         yarn
         npm run build
