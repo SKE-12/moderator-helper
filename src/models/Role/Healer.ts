@@ -11,7 +11,7 @@ export default class Healer extends Player {
     this.role = RoleName.HEALER
     this.vote = 1
     this.allegiance = Allegiance.VILLAGER
-    this.isNightRole = false
+    this.isNightRole = true
     this.order = 5
   }
 

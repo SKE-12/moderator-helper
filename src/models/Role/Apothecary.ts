@@ -7,11 +7,11 @@ export default class Apothecary extends Player {
   constructor(playerName: string) {
     super()
     this.playerName = playerName
-    this.modDescription = 'Apothecary ลืมตา Apothecary ชี้คนที่จะปกป้อง 1 คน'
+    this.modDescription = ''
     this.role = RoleName.APOTHECARY
     this.vote = 1
     this.allegiance = Allegiance.VILLAGER
-    this.isNightRole = true
+    this.isNightRole = false
     this.order = 4
   }
 
