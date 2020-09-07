@@ -82,6 +82,13 @@ export default class GameState {
   }
 
   @action.bound
+  public getRoleForNightCall(): Player[] {
+    return _.uniqWith(this.getAliveRole(), (a, b) => {
+      return a.role === b.role
+    })
+  }
+
+  @action.bound
   public endNight() {
     this.killTarget.filter(killPlayer => {
       for (const savedPlayer of this.saveTarget) {
