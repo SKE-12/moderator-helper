@@ -92,6 +92,12 @@ export default class GameState {
     if (this.huntressTarget) {
       this.nightSummary.annoucement.push('Player: ' + this.huntressTarget.playerName + 'ถูกฆ่าตายในคืนนี้')
     }
+
+    this.winner = this.checkWinCondition()
+
+    if (this.winner) {
+      this.endGame(this.winner)
+    }
   }
 
   @action.bound

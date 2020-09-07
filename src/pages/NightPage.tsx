@@ -7,16 +7,14 @@ import { useHistory } from 'react-router-dom';
 import {
   Button,
   Gap,
-  Photo,
 } from 'solarxui';
 import styled from 'styled-components';
 
 import { useGameState } from '../contexts/gameController';
 import { RoleName } from '../models/Allegiance';
 import Player from '../models/Player';
-import roleImgResolver from '../roleImgResolver';
 
-const Container = styled(Gap)`
+const Container = styled.div`
     text-align: center;
 `
 
@@ -56,14 +54,14 @@ const Night = () => {
         <Gap type="vertical" size="8px">
             <h1>Night Phase</h1>
             <div style={{ textAlign: 'center' }}>
-                <Photo size={300} src={roleImgResolver(role.toLowerCase().split(' ').join('_'))} />
+                {/* <Photo size={300} src={roleImgResolver(role.toLowerCase().split(' ').join('_'))} /> */}
             </div>
-            <Container type="vertical" size="2px">
+            <Container>
                 <div className="bold">{role}</div>
                 <div>`` {modDescription} ``</div>
             </Container>
             {/** @ts-ignore */}
-            <Select options={players} values={currentSelect} onChange={([value]) => setCurrentSelect(value.value)} />
+            <Select options={targetPlayers} values={currentSelect} onChange={([value]) => setCurrentSelect(value.value)} />
             {/** @ts-ignore */}
             <Select options={targetPlayers} values={secondarySelect} onChange={([value]) => setSecondarySelect(value.value)} disabled={role !== RoleName.FALLEN_ANGEL} />
             <Button onClick={onSubmit}>Submit</Button>

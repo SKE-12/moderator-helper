@@ -12,6 +12,7 @@ import InputPage from './pages/InputPage';
 import Night from './pages/NightPage';
 import SelectPage from './pages/SelectPage';
 import SummaryPage from './pages/SummaryPage';
+import WinPage from './pages/WinPage';
 
 const Container = styled.div`
   padding: 16px;
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/day" component={DayPage} />
         <Route path="/night" component={Night} />
         <Route path="/summary" component={SummaryPage} />
+        <Route path="/end" component={WinPage} />
         <Route path="/" component={SelectPage} />
       </Switch>
     </Container>
