@@ -1,0 +1,39 @@
+{
+  "name": "my-razzle-app",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "razzle start --type=spa",
+    "build": "razzle build --type=spa",
+    "test": "razzle test --env=jsdom"
+  },
+  "dependencies": {
+    "@types/react-responsive": "^8.0.2",
+    "axios": "^0.19.2",
+    "axios-hooks": "^2.1.0",
+    "firebase": "^7.16.0",
+    "geolib": "^3.3.1",
+    "lodash": "^4.17.19",
+    "razzle": "^3.1.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-firebase-hooks": "^2.2.0",
+    "react-responsive": "^8.1.0",
+    "react-router-dom": "^5.2.0",
+    "react-use": "^15.3.2",
+    "solarxui": "^0.1.16",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/firebase": "^3.2.1",
+    "@types/lodash": "^4.14.157",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.1",
+    "@types/webpack-env": "^1.15.2",
+    "razzle-plugin-typescript": "^3.1.5",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.6"
+  }
+}
