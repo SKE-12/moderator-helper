@@ -26,7 +26,7 @@ export default class FallenAngel extends Player {
       return false
     }
     const changeIndex = gameState.killTarget.findIndex((player) => {
-      return target[0].playerName === player.playerName
+      return target[0].id === player.id
     })
     gameState.killTarget[changeIndex] = target[1]
     this.isAbilityUse = true
