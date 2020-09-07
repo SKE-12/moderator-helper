@@ -20,7 +20,7 @@ jobs:
     - name: install, build
       run: |
         yarn
-        NODE_ENV=development yarn build
+        NODE_ENV=development CI=false yarn build
     - name: GitHub Action for Firebase
       uses: w9jds/firebase-action@v1.0.1
       env:
