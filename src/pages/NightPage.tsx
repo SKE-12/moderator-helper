@@ -77,7 +77,7 @@ const Night = () => {
             <Container>
                 <div className="bold">{role}</div>
                 <div>{role !== RoleName.FALLEN_ANGEL && `\`\` ${modDescription} \`\``}</div>
-                <div>{role === RoleName.FALLEN_ANGEL && `\`\` Fallen angel ลืมตา ${killTarget.map(player => player.playerName).join(',')} กำลังจะตาย หากต้องการใช้พลังให้ชี้เป้าหมาย \`\``}</div>
+                <div>{role === RoleName.FALLEN_ANGEL && `\`\` Fallen angel ลืมตา (ให้ชี้ไปที่คนในรายชื่อนี้ ${killTarget.map(player => player.playerName).join(',')}) กำลังจะตาย หากต้องการใช้พลังให้ชี้เป้าหมาย \`\``}</div>
             </Container>
             {/** @ts-ignore */}
             <Select options={targetPlayers} values={currentSelect} onChange={([value]) => setCurrentSelect(value.value)} />

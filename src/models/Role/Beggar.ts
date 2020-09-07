@@ -16,6 +16,9 @@ export default class Beggar extends Player {
   }
 
   deathRattle(gameState: GameState): boolean {
+    if (this.allegiance === Allegiance.PLAGUE) {
+      return true
+    }
     this.allegiance = Allegiance.PLAGUE
     gameState.nightSummary.annoucement.push('Beggar ได้ทำการเปลี่ยนฝั่งแล้ว')
     return false

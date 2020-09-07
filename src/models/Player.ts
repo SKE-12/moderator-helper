@@ -36,7 +36,7 @@ export default class Player {
   }
 
   nightAction(gameState: GameState, target: Player[]): boolean | null {
-    return false
+    return null
   }
 
   deathRattle(gameState: GameState): boolean {
