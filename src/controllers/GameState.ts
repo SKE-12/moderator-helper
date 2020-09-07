@@ -7,6 +7,7 @@ import {
   Allegiance,
   GamePhase,
 } from '../models/Allegiance';
+import _ from 'lodash'
 import Player from '../models/Player';
 import SummaryModel from '../models/SummaryModel';
 
@@ -67,12 +68,17 @@ export default class GameState {
 
   @action.bound
   public getAlivePlayer(): Player[] {
+    return this.players.filter(player => player.isAlive && !_.isEmpty(player.playerName))
+  }
+
+  @action.bound
+  public getAliveRole(): Player[] {
     return this.players.filter(player => player.isAlive)
   }
 
   @action.bound
   public getMajority(): number {
-    return Math.ceil(this.getAlivePlayer().filter((player) => player.playerName).length/2)
+    return Math.ceil((this.getAlivePlayer().length+1)/2)
   }
 
   @action.bound

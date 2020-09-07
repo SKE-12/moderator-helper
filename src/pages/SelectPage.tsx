@@ -20,7 +20,7 @@ import Priest from '../models/Role/Priest';
 import Sentry from '../models/Role/Sentry';
 import SinisterVillager from '../models/Role/SinisterVillager';
 import Undertaker from '../models/Role/Undertaker';
-import Apothecary from '../models/Role/Villager';
+import Apothecary from '../models/Role/Apothecary';
 import Villager from '../models/Role/Villager';
 import WeakVillager from '../models/Role/WeakVillager';
 
