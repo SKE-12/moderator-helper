@@ -57,7 +57,7 @@ const InputPage = () => {
         player.playerName = name
 
         if (otherClasses.length === 0) {
-            const fullPlayers = [...players, player]
+            const fullPlayers = [...players, player].sort((p1, p2) => p1.order < p2.order ? 1 : -1)
             setPlayerAndStartGame(fullPlayers)
         } else {
             setActiveClasses(otherClasses)
