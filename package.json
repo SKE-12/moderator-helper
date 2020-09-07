@@ -17,9 +17,11 @@
     "razzle": "^3.1.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropdown-select": "^4.5.1",
     "react-firebase-hooks": "^2.2.0",
     "react-responsive": "^8.1.0",
     "react-router-dom": "^5.2.0",
+    "react-select": "^3.1.0",
     "react-use": "^15.3.2",
     "solarxui": "^0.1.16",
     "styled-components": "^5.1.1"

@@ -1,11 +1,60 @@
 import React from 'react';
 
-import { Gap } from 'solarxui';
+import {
+  Button,
+  Gap,
+} from 'solarxui';
+import styled from 'styled-components';
 
-const DayPage = () => (
-    <Gap type="vertical" size="8px">
-        <h1>Day Phase</h1>
-    </Gap>
-)
+import VoteOutModal from '../components/VoteOutModal';
+
+const Container = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+`
+
+const Danger = styled(Button)`
+    background-color: red !important;
+`
+
+const FAKE_DATA = [
+    {
+        title: 'Fuck',
+        value: 1,
+    },
+    {
+        title: 'Fuck',
+        value: 1,
+    },
+    {
+        title: 'Fuck',
+        value: 1,
+    },
+    {
+        title: 'Fuck',
+        value: 1,
+    },
+]
+
+const DayPage = () => {
+    return (
+        <Gap type="vertical" size="8px">
+            <h1>Day Phase</h1>
+            <Container>
+                <div className="title bold">Player</div>
+                <div className="title bold">Majority</div>
+            </Container>
+            {FAKE_DATA.map(({ title, value }) => (
+                <Container>
+                    <div>{title}</div>
+                    <div>{value}</div>
+                </Container>
+            ))}
+            <VoteOutModal />
+            <Danger>Skip</Danger>
+        </Gap>
+    )
+}
 
 export default DayPage
