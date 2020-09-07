@@ -21,15 +21,21 @@ export default class FallenAngel extends Player {
     this.isAbilityUse = false
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]):  boolean | null {
     if (this.isAbilityUse) {
-      return false
+      return null
     }
     const changeIndex = gameState.killTarget.findIndex((player) => {
       return target[0].id === player.id
     })
+    const savedIndex = gameState.saveTarget.findIndex(player =>  {
+      return gameState.killTarget[changeIndex].id === player.id
+    })
+    if (savedIndex === -1) {
+      return null
+    }
     gameState.killTarget[changeIndex] = target[1]
     this.isAbilityUse = true
-    return true
+    return null
   }
 }

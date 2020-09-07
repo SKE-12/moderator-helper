@@ -15,7 +15,7 @@ export default class Crow extends Player {
     this.order = 3
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]):  boolean | null {
     if (target[0].role === RoleName.WEAK_VILLAGER || target[0].role === RoleName.SENTRY || target[0].role === RoleName.CONTAGIOUS_VILLAGER) {
       gameState.killTarget.push(target[0])
       return true

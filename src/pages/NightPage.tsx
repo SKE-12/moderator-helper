@@ -22,7 +22,7 @@ const Container = styled.div`
 const Night = () => {
     const [currentSelect, setCurrentSelect] = useState<Player>()
     const [secondarySelect, setSecondarySelect] = useState<Player>()
-    const { players, targetPlayers, nightAction, endNight } = useGameState(gameState => ({
+    const { players, targetPlayers, nightAction, endNight, killTarget } = useGameState(gameState => ({
         players: gameState.getRoleForNightCall(),
         targetPlayers: gameState.getAlivePlayer().map(player => ({
             value: player,
@@ -30,8 +30,9 @@ const Night = () => {
         })),
         nightAction: gameState.nightAction,
         endNight: gameState.endNight,
+        killTarget: gameState.killTarget,
     }))
-    const [modResponse, setModResponse] = useState<boolean|null>()
+    const [modResponse, setModResponse] = useState<boolean|null>(null)
     const [toBeTakeActionPlayers, setToBeTakeActionPlayers] = useState<Player[]>(players)
     const history = useHistory()
 
@@ -39,6 +40,20 @@ const Night = () => {
         const currentPlayer = toBeTakeActionPlayers[0]
         const modResponse = nightAction(currentPlayer, [currentSelect!, secondarySelect!])
         setModResponse(modResponse)
+
+        const updatedList = without(toBeTakeActionPlayers, currentPlayer)
+        if (updatedList.length === 0) {
+            endNight()
+            history.push('/summary')
+        } else {
+            setCurrentSelect(undefined)
+            setSecondarySelect(undefined)
+            setToBeTakeActionPlayers(updatedList)
+        }
+    }
+
+    const onSkip = () =>  {
+        const currentPlayer = toBeTakeActionPlayers[0]
 
         const updatedList = without(toBeTakeActionPlayers, currentPlayer)
         if (updatedList.length === 0) {
@@ -61,13 +76,15 @@ const Night = () => {
             </div>
             <Container>
                 <div className="bold">{role}</div>
-                <div>`` {modDescription} ``</div>
+                <div>{role !== RoleName.FALLEN_ANGEL && `\`\` ${modDescription} \`\``}</div>
+                <div>{role === RoleName.FALLEN_ANGEL && `\`\` Fallen angel ลืมตา ${killTarget.map(player => player.playerName).join(',')} กำลังจะตาย หากต้องการใช้พลังให้ชี้เป้าหมาย \`\``}</div>
             </Container>
             {/** @ts-ignore */}
             <Select options={targetPlayers} values={currentSelect} onChange={([value]) => setCurrentSelect(value.value)} />
             {/** @ts-ignore */}
             <Select options={targetPlayers} values={secondarySelect} onChange={([value]) => setSecondarySelect(value.value)} disabled={role !== RoleName.FALLEN_ANGEL} />
             <Button onClick={onSubmit}>Submit</Button>
+            <Button onClick={onSkip} hidden={role !== RoleName.FALLEN_ANGEL}>Skip</Button>
             <ModResponseModal modResponse={modResponse} onOk={setModResponse} />
         </Gap>
     )

@@ -16,7 +16,14 @@ const SummaryPage = () => {
     return (
         <Gap type="vertical" size="8px">
             <h1>Summary</h1>
-            {nightSummary.annoucement}
+            {nightSummary.annoucement.length > 0 && nightSummary.annoucement.map((annouce) =>  {
+                return (
+                    <>
+                        {annouce}
+                    </>
+                )
+            })}
+            {nightSummary.annoucement.length === 0 && <>คืนนี้ไม่มีคนตาย</>}
             <Button onClick={goToDay}>Next</Button>
         </Gap>
     )

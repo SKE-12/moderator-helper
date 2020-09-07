@@ -94,13 +94,15 @@ export default class GameState {
 
   @action.bound
   public endNight() {
-    this.killTarget.filter(killPlayer => {
+    const killed = this.killTarget.filter(killPlayer => {
       for (const savedPlayer of this.saveTarget) {
         return !(killPlayer.id === savedPlayer.id)
       }
       return true
     })
-    for(const deadPlayer of this.killTarget) {
+    console.log('saved', this.saveTarget)
+    console.log('Killed', killed)
+    for(const deadPlayer of killed) {
       const isDead = deadPlayer.deathRattle(this)
       if (isDead) {
         this.nightSummary.annoucement.push('Player: ' + deadPlayer.playerName + 'ถูกฆ่าตายในคืนนี้')
@@ -124,7 +126,7 @@ export default class GameState {
   }
 
   @action.bound
-  public nightAction(player: Player, targets: Player[]): boolean {
+  public nightAction(player: Player, targets: Player[]): boolean | null {
     return player.nightAction(this, targets)
   }
 
@@ -136,7 +138,7 @@ export default class GameState {
       this.endGame(winning)
       return
     }
-    this.gamePhase = GamePhase.NIGHT
+    this.startNight()
   }
 
   @action.bound

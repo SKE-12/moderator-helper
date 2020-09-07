@@ -15,12 +15,12 @@ export default class Healer extends Player {
     this.order = 5
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]): boolean | null {
     const index = gameState.players.findIndex((player) => player.role === RoleName.APOTHECARY)
     if (index === -1) {
-      return false
+      return null
     }
     gameState.saveTarget.push(target[0])
-    return true
+    return null
   }
 }

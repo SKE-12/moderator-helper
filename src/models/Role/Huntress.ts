@@ -15,7 +15,7 @@ export default class Huntress extends Player {
     this.order = 6
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]): boolean | null {
     if (target[0].role === RoleName.CROW) {
       gameState.huntressTarget = target[0]
       this.isNightRole = false

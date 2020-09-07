@@ -15,8 +15,8 @@ export default class PlagueDoctor extends Player {
     this.order = 2
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]): boolean | null {
     gameState.killTarget.push(target[0])
-    return true
+    return null
   }
 }

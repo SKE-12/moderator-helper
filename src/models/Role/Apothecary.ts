@@ -15,12 +15,18 @@ export default class Apothecary extends Player {
     this.order = 4
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]): boolean | null {
     gameState.saveTarget.push(target[0])
-    return true
+    return null
   }
 
   deathRattle(gameState: GameState): boolean {
+    gameState.players.filter((player) => player.role === RoleName.HEALER).forEach(player => player.isNightRole = false)
+    this.isAlive = false
+    return true
+  }
+
+  votedOut(gameState: GameState): boolean {
     gameState.players.filter((player) => player.role === RoleName.HEALER).forEach(player => player.isNightRole = false)
     this.isAlive = false
     return true

@@ -35,7 +35,7 @@ export default class Player {
     this.isAlive = true
   }
 
-  nightAction(gameState: GameState, target: Player[]): boolean {
+  nightAction(gameState: GameState, target: Player[]): boolean | null {
     return false
   }
 

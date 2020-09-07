@@ -16,7 +16,7 @@ export default class Priest extends Player {
   }
 
   nightAction(gameState: GameState, target: Player[]) {
-    if (target[0].role === RoleName.PRIEST) {
+    if (target[0].role === RoleName.PLAGUE_DOCTOR) {
       return true
     }
     return false
