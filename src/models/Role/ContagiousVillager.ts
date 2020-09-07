@@ -20,7 +20,7 @@ export default class ContagiousVillager extends Player {
       return player.role === RoleName.CONTAGIOUS_VILLAGER
     })
     if (index !== -1) {
-      gameState.players[index].deathRattle(gameState)
+      gameState.players[index].isAlive = false
     }
     return true
   }
