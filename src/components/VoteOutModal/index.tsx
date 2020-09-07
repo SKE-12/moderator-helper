@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 // @ts-ignore
 import Select from 'react-dropdown-select';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Gap,
@@ -30,6 +31,7 @@ const options = [
 ]
 
 const VoteOutModal = () => {
+    const history = useHistory()
     const [state, setState] = useState('none')
     const [currentSelect, setCurrentSelect] = useState('')
     const onVoteOutStart = () => {
@@ -37,7 +39,11 @@ const VoteOutModal = () => {
     }
 
     const onVoteSelect = () => {
-        setState('select')
+        if (state === 'start') {
+            setState('select')
+        } else {
+            history.push('/night')
+        }
     }
 
     const onCancel = () => {
@@ -56,7 +62,7 @@ const VoteOutModal = () => {
                                     <>
                                         <div className="title">Vote Out</div>
                                         {/** @ts-ignore */}
-                                        <Select options={options} values={currentSelect} dropdownPosition="top" onChange={setCurrentSelect} />
+                                        <Select options={options} values={[currentSelect]} dropdownPosition="top" onChange={setCurrentSelect} />
                                     </>
                                 ) : (
                                     <div>

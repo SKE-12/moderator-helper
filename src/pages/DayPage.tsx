@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Gap,
@@ -38,6 +39,11 @@ const FAKE_DATA = [
 ]
 
 const DayPage = () => {
+    const history = useHistory()
+    const onSkip = () => {
+        history.push('/night')
+    }
+
     return (
         <Gap type="vertical" size="8px">
             <h1>Day Phase</h1>
@@ -52,7 +58,7 @@ const DayPage = () => {
                 </Container>
             ))}
             <VoteOutModal />
-            <Danger>Skip</Danger>
+            <Danger onClick={onSkip}>Skip</Danger>
         </Gap>
     )
 }

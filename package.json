@@ -8,11 +8,13 @@
     "test": "razzle test --env=jsdom"
   },
   "dependencies": {
+    "@types/history": "^4.7.7",
     "@types/react-responsive": "^8.0.2",
     "axios": "^0.19.2",
     "axios-hooks": "^2.1.0",
     "firebase": "^7.16.0",
     "geolib": "^3.3.1",
+    "history": "^5.0.0",
     "lodash": "^4.17.19",
     "razzle": "^3.1.5",
     "react": "^16.13.1",
