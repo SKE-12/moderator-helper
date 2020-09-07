@@ -86,6 +86,10 @@ export default class GameState {
     return _.uniqWith(this.getAliveRole(), (a, b) => {
       return a.role === b.role
     })
+    .filter(({ isNightRole }) => isNightRole)
+    .sort((a, b) => {
+      return a.order - b.order
+    })
   }
 
   @action.bound
@@ -120,8 +124,8 @@ export default class GameState {
   }
 
   @action.bound
-  public nightAction(player: Player, targets: Player[]) {
-    player.nightAction(this, targets)
+  public nightAction(player: Player, targets: Player[]): boolean {
+    return player.nightAction(this, targets)
   }
 
   @action.bound
