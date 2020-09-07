@@ -17,12 +17,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install, build
-      env:
-        NODE_ENV: development
+    - name: install, build
       run: |
         yarn
-        npm run build
+        NODE_ENV=development yarn build
     - name: GitHub Action for Firebase
       uses: w9jds/firebase-action@v1.0.1
       env:
