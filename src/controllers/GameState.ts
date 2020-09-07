@@ -70,5 +70,31 @@ export default class GameState {
 
   public voteOut(player: Player) {
     player.votedOut(this)
+    const winning = this.checkWinCondition()
+    if(winning) {
+      this.endGame(winning)
+    }
+    this.gamePhase = GamePhase.NIGHT
+  }
+
+  public endDay() {
+    this.gamePhase = GamePhase.NIGHT
+  }
+
+  private checkWinCondition(): Allegiance | null {
+    let villianSide = 0
+    const alivePlayer = this.players.filter(player => player.isAlive)
+    for (const player of alivePlayer) {
+      if (player.allegiance === Allegiance.PLAGUE) {
+        villianSide++
+      }
+    }
+    if (villianSide === 0) {
+      return Allegiance.VILLAGER
+    }
+    if (villianSide >= alivePlayer.length/2) {
+      return Allegiance.PLAGUE
+    }
+    return null
   }
 }
