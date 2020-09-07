@@ -20,11 +20,11 @@ const App = () => {
   return (
     <Container>
       <Switch>
-        <Route path="/" component={SelectPage} />
         <Route path="/input" component={InputPage} />
         <Route path="/day" component={DayPage} />
         <Route path="/night" component={Night} />
         <Route path="/summary" component={SummaryPage} />
+        <Route path="/" component={SelectPage} />
       </Switch>
     </Container>
   )
