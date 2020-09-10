@@ -73,6 +73,7 @@ const InputPage = () => {
             <Header>Input Name</Header>
             <Photo size={400} src={roleImgResolver(Case.snake(activeClass.name))}/>
             <RoleName>{Case.title(activeClass.name)}</RoleName>
+            <div hidden={activeClass.name !== 'PlagueDoctor'}>(หากมี Sinister Villager ให้ Sinister Villager ลืมตาขึ้นมาด้วย)</div>
             <InputName onChange={onChange} value={name} />
             <Button variant="outlined" style={{marginTop: "20px"}} onClick={onSubmit}>Submit</Button>
         </Container>

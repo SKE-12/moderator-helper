@@ -83,7 +83,7 @@ const Night = () => {
             <Select options={targetPlayers} values={currentSelect} onChange={([value]) => setCurrentSelect(value.value)} />
             {/** @ts-ignore */}
             <Select options={targetPlayers} values={secondarySelect} onChange={([value]) => setSecondarySelect(value.value)} disabled={role !== RoleName.FALLEN_ANGEL} />
-            <Button onClick={onSubmit}>Submit</Button>
+            <Button disabled={currentSelect === undefined} onClick={onSubmit}>Submit</Button>
             <Button onClick={onSkip} hidden={role !== RoleName.FALLEN_ANGEL}>Skip</Button>
             <ModResponseModal modResponse={modResponse} onOk={setModResponse} />
         </Gap>

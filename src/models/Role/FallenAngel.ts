@@ -31,11 +31,17 @@ export default class FallenAngel extends Player {
     const savedIndex = gameState.saveTarget.findIndex(player =>  {
       return gameState.killTarget[changeIndex].id === player.id
     })
+    const killIndex = gameState.players.findIndex(player =>  player.id === target[1].id)
     if (savedIndex !== -1) {
       return null
     }
-    gameState.killTarget[changeIndex] = target[1]
+    gameState.killTarget.splice(changeIndex, 1)
+
+    gameState.players[killIndex].deathRattle(gameState)
+    gameState.nightSummary.annoucement.push('Player: ' + gameState.players[killIndex].playerName + 'ถูกฆ่าตายในคืนนี้')
+
     this.isAbilityUse = true
+    this.modDescription = 'Fallen Angel ลืมตา Fallen Angel คนนี้กำลังจะตาย หากจะใช้ความสามารถให้เลือกคนที่จะตายแทน (Fallen Angel ได้ใช้ความสามารถไปแล้ว)'
     return null
   }
 }
