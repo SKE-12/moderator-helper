@@ -1,4 +1,6 @@
-import apothecary from "./img/role_apothecary.jpg";
+// tslint:disable
+const context = require["context"]("./img", true, /\.(gif|png|jpe?g|svg)/);
+const apothecary = context("./role_apothecary.jpg");
 import begger from "./img/role_beggar.jpg";
 import blacksmith from "./img/role_blacksmith.jpg";
 import contagious_villager from "./img/role_contagious_villager.jpg";
