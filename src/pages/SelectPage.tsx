@@ -74,8 +74,8 @@ const CardComponent = styled.div`
 `
 const Roconstext = styled.div`
     padding-left: 1%;
-    padding-top: 3%;
-    padding-bottom: 3%;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-style: solid;
     border-width: 1px;
     cursor: pointer;
