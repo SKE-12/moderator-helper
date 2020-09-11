@@ -17,7 +17,7 @@ export default class Healer extends Player {
 
   nightAction(gameState: GameState, target: Player[]): boolean | null {
     const index = gameState.players.findIndex((player) => player.role === RoleName.APOTHECARY)
-    if (index === -1) {
+    if (index === -1 || gameState.players[index].role === RoleName.WEAK_VILLAGER) {
       return null
     }
     gameState.saveTarget.push(target[0])

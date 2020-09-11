@@ -66,7 +66,7 @@ const Night = () => {
         }
     }
 
-    const { role, modDescription } = toBeTakeActionPlayers[0]
+    const { role, modDescription, isAlive } = toBeTakeActionPlayers[0]
 
     return (
         <Gap type="vertical" size="8px">
@@ -83,8 +83,8 @@ const Night = () => {
             <Select options={targetPlayers} values={currentSelect} onChange={([value]) => setCurrentSelect(value.value)} />
             {/** @ts-ignore */}
             <Select options={targetPlayers} values={secondarySelect} onChange={([value]) => setSecondarySelect(value.value)} disabled={role !== RoleName.FALLEN_ANGEL} />
-            <Button disabled={currentSelect === undefined} onClick={onSubmit}>Submit</Button>
-            <Button onClick={onSkip} hidden={role !== RoleName.FALLEN_ANGEL}>Skip</Button>
+            <Button hidden={!isAlive} disabled={currentSelect === undefined} onClick={onSubmit}>Submit</Button>
+            <Button onClick={onSkip} hidden={role !== RoleName.FALLEN_ANGEL && isAlive}>Skip</Button>
             <ModResponseModal modResponse={modResponse} onOk={setModResponse} />
         </Gap>
     )
