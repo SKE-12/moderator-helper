@@ -77,13 +77,18 @@ export default class GameState {
   }
 
   @action.bound
+  public getAllRole(): Player[] {
+    return this.players
+  }
+
+  @action.bound
   public getMajority(): number {
     return Math.ceil((this.getAlivePlayer().length+1)/2)
   }
 
   @action.bound
   public getRoleForNightCall(): Player[] {
-    return _.uniqWith(this.getAliveRole(), (a, b) => {
+    return _.uniqWith(this.players, (a, b) => {
       return a.role === b.role
     })
     .filter(({ isNightRole }) => isNightRole)
