@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "razzle start --type=spa",
+    "dev": "razzle start --type=spa",
     "build": "razzle build --type=spa",
     "test": "razzle test --env=jsdom"
   },
