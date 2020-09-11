@@ -82,6 +82,7 @@ const InputPage = () => {
       <img
         src={roleImgResolver(Case.snake(activeClass.name) as RoleImageName)}
       />
+      <img src="https://firebasestorage.googleapis.com/v0/b/moderator-helper.appspot.com/o/role_crow.jpg?alt=media" />
       <RoleName>{Case.title(activeClass.name)}</RoleName>
       <div hidden={activeClass.name !== "PlagueDoctor"}>
         (หากมี Crow ในเกม ให้ Crow ลืมตาขึ้นมาด้วย และให้ Plague Doctor
