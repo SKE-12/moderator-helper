@@ -35,7 +35,6 @@ export default class FallenAngel extends Player {
     if (savedIndex !== -1) {
       return null
     }
-    console.log(gameState.killTarget[changeIndex])
     if (gameState.killTarget[changeIndex].role === RoleName.BEGGAR && gameState.killTarget[changeIndex].allegiance === Allegiance.VILLAGER) {
       return null
     }
