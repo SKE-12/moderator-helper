@@ -71,28 +71,23 @@ const InputPage = () => {
   };
 
   const activeClass = activeClasses[0];
+  const player = new activeClass() as Player;
+  const roleName = player.role;
 
   return (
     <Container>
       <Header>Input Name</Header>
-      <Photo
-        size={400}
-        src={roleImgResolver(Case.snake(activeClass.name) as RoleImageName)}
-      />
-      <img
-        src={roleImgResolver(Case.snake(activeClass.name) as RoleImageName)}
-      />
-      <img src="https://firebasestorage.googleapis.com/v0/b/moderator-helper.appspot.com/o/role_crow.jpg?alt=media" />
-      <RoleName>{Case.title(activeClass.name)}</RoleName>
-      <div hidden={activeClass.name !== "PlagueDoctor"}>
+      <Photo size={400} src={roleImgResolver(roleName as RoleImageName)} />
+      <RoleName>{roleName}</RoleName>
+      <div hidden={roleName !== "PlagueDoctor"}>
         (หากมี Crow ในเกม ให้ Crow ลืมตาขึ้นมาด้วย และให้ Plague Doctor
         ทุกคนยกนิ้วโป้งขึ้น)
       </div>
-      <div hidden={activeClass.name !== "Apothecary"}>
+      <div hidden={roleName !== "Apothecary"}>
         ให้เรียก Healer ขึ้นมาด้วย แล้วให้ Apothecary ยกนิ้วโป้งขึ้น
       </div>
-      <div hidden={activeClass.name !== "SinisterVillager"}>
-        ให้เรียก Crow ลืมตาขึ้นมาด้วยแล้วให้ Plauge Doctor ทุกคนชูนิ้วโป้งขึ้น
+      <div hidden={roleName !== "SinisterVillager"}>
+        ให้เรียก Crow ลืมตาขึ้นมาด้วยแล้วให้ Plague Doctor ทุกคนชูนิ้วโป้งขึ้น
       </div>
       <InputName onChange={onChange} value={name} />
       <Button
