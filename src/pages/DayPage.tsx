@@ -30,7 +30,7 @@ const DayPage = () => {
         <Gap type="vertical" size="8px">
             <h1>Day Phase</h1>
             <Container>
-                <div className="title bold">Player</div>
+                <div className="title bold">Player ({players.length})</div>
                 <div className="title bold">Majority ({majority})</div>
             </Container>
             {players.map(({ playerName, role }) => (
