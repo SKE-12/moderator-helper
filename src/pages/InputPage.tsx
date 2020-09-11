@@ -73,7 +73,9 @@ const InputPage = () => {
             <Header>Input Name</Header>
             <Photo size={400} src={roleImgResolver(Case.snake(activeClass.name))}/>
             <RoleName>{Case.title(activeClass.name)}</RoleName>
-            <div hidden={activeClass.name !== 'PlagueDoctor'}>(หากมี Sinister Villager ให้ Sinister Villager ลืมตาขึ้นมาด้วย)</div>
+            <div hidden={activeClass.name !== 'PlagueDoctor'}>(หากมี Crow ในเกม ให้ Crow ลืมตาขึ้นมาด้วย และให้ Plague Doctor ทุกคนยกนิ้วโป้งขึ้น)</div>
+            <div hidden={activeClass.name !== 'Apothecary'}>ให้เรียก Healer ขึ้นมาด้วย แล้วให้ Apothecary ยกนิ้วโป้งขึ้น</div>
+            <div hidden={activeClass.name !== 'SinisterVillager'}>ให้เรียก Crow ลืมตาขึ้นมาด้วยแล้วให้ Plauge Doctor ทุกคนชูนิ้วโป้งขึ้น</div>
             <InputName onChange={onChange} value={name} />
             <Button variant="outlined" style={{marginTop: "20px"}} onClick={onSubmit}>Submit</Button>
         </Container>
