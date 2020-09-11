@@ -35,9 +35,15 @@ export default class FallenAngel extends Player {
     if (savedIndex !== -1) {
       return null
     }
+    console.log(gameState.killTarget[changeIndex])
+    if (gameState.killTarget[changeIndex].role === RoleName.BEGGAR && gameState.killTarget[changeIndex].allegiance === Allegiance.VILLAGER) {
+      return null
+    }
     gameState.killTarget.splice(changeIndex, 1)
 
-    gameState.players[killIndex].deathRattle(gameState)
+    if (!gameState.players[killIndex].deathRattle(gameState)) {
+      gameState.players[killIndex].deathRattle(gameState)
+    }
     gameState.nightSummary.annoucement.push('Player: ' + gameState.players[killIndex].playerName + 'ถูกฆ่าตายในคืนนี้')
 
     this.isAbilityUse = true

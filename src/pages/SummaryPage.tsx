@@ -18,12 +18,12 @@ const SummaryPage = () => {
             <h1>Summary</h1>
             {nightSummary.annoucement.length > 0 && nightSummary.annoucement.map((annouce) =>  {
                 return (
-                    <>
+                    <div>
                         {annouce}
-                    </>
+                    </div>
                 )
             })}
-            {nightSummary.annoucement.length === 0 && <>คืนนี้ไม่มีคนตาย</>}
+            {nightSummary.annoucement.length === 0 && <div>คืนนี้ไม่มีคนตาย</div>}
             <Button onClick={goToDay}>Next</Button>
         </Gap>
     )
