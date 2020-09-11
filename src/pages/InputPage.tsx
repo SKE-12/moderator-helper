@@ -8,7 +8,7 @@ import { Button } from "@material-ui/core";
 
 import { useGameState } from "../contexts/gameController";
 import Player from "../models/Player";
-import roleImgResolver from "../roleImgResolver";
+import roleImgResolver, { RoleImageName } from "../roleImgResolver";
 
 const Container = styled.div`
   display: flex;
@@ -75,7 +75,10 @@ const InputPage = () => {
   return (
     <Container>
       <Header>Input Name</Header>
-      <Photo size={400} src={roleImgResolver(Case.snake(activeClass.name))} />
+      <Photo
+        size={400}
+        src={roleImgResolver(Case.snake(activeClass.name) as RoleImageName)}
+      />
       <RoleName>{Case.title(activeClass.name)}</RoleName>
       <div hidden={activeClass.name !== "PlagueDoctor"}>
         (หากมี Sinister Villager ให้ Sinister Villager ลืมตาขึ้นมาด้วย)
